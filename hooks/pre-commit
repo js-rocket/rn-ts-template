@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "Running pre-commit hook"
+
+# Automatically format code
+yarn prettier -w src/
+EXIT_CODE=$?; if [ $EXIT_CODE -ne 0 ]; then exit $EXIT_CODE; fi
+
+# Lint code and re-format to lint standards
+yarn lint --fix
+EXIT_CODE=$?; if [ $EXIT_CODE -ne 0 ]; then exit $EXIT_CODE; fi
+
+# Run some unit tests
+# yarn test
+# if [ $? -ne 0 ]; then exit $?; fi
